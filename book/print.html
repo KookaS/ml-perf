@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>cracking-the-perf-interview</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="on_chip_parallelism.html"><strong aria-hidden="true">2.</strong> On-Chip Parallelism (theory)</a></li><li class="chapter-item expanded "><a href="estimation/estimation.html"><strong aria-hidden="true">3.</strong> Estimating Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="estimation/compute.html"><strong aria-hidden="true">3.1.</strong> How to Compute It?</a></li><li class="chapter-item expanded "><a href="estimation/example.html"><strong aria-hidden="true">3.2.</strong> Practical Example</a></li><li class="chapter-item expanded "><a href="estimation/roofline.html"><strong aria-hidden="true">3.3.</strong> Roofline Model</a></li><li class="chapter-item expanded "><a href="estimation/questions.html"><strong aria-hidden="true">3.4.</strong> Interview Questions</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">cracking-the-perf-interview</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>This book's goal is to compile the skills required to succeed at the Machine Learning Performance Engineer interview. It should be used as interview preparation.</p>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<p>A good understanding of computer programming is required. Linear algebra, Machine Learning, and distributed programming skills will greatly help understanding the material but are not necessary.</p>
+<h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
+<p>Some chapters will be marked with a <code>(theory)</code> tag. This indicates that they introduce concepts that are required to fully understand questions asked during interviews, even though they are not strictly required to succeed.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="on-chip-parallelism"><a class="header" href="#on-chip-parallelism">On-Chip Parallelism</a></h1>
+<p>Machine Learning workloads require more and more computational power as we scale the number of parameters, the context lengths, and the amount of data we ingest. At the same time, chip design has hit a plateau; it is getting prohibitively expensive to increase the number of operations a chip can do per second. Furthermore, memory latency and bandwidth have not been keeping up with the increases in compute speed, implying that computational power cannot be fully leveraged because the data cannot be moved as fast as it is being processed. We cannot rely on faster chips, so we instead rely on <strong>the chips doing more at the same time</strong> either by doing multiple operations at once or having multiple cores working together in parallel.</p>
+<h2 id="sequential-execution-model"><a class="header" href="#sequential-execution-model">Sequential execution model</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture">Traditional chips were thought of as having two main blocks</a>; the memory (RAM) and the Central Processing Unit (CPU.)</p>
+<p>Traditional software is usually written with this implied model:</p>
+<ol>
+<li>Load some scalars from RAM to the CPU</li>
+<li>Do some operations on the CPU</li>
+<li>Write back the output of those operations to RAM</li>
+<li>Repeat for the next instruction</li>
+</ol>
+<p>While this model is great and allowed us to write most of the software running the world today; it has long become incoherent with the way chips actually process data. We let the compilers and the chips themselves rewrite our code to make better use of the actual capabilities of the hardware; mostly through different levels of parallelism and better memory access patterns.</p>
+<h2 id="the-different-levels-of-on-chip-parallelism"><a class="header" href="#the-different-levels-of-on-chip-parallelism">The different levels of on-chip parallelism</a></h2>
+<p>Modern chips are all inherently parallel. Whether they are GPUs, TPUs, or modern CPUs. They also all feature different types of parallelism that need to be exploited to maximize the chip's utilisation. Exploiting these mechanisms is not always explicit because compilers are reasonably good at leveraging target architectures's features. Some chips are also capable of rewriting the machine code they receive before executing it.</p>
+<h3 id="io-parallelism"><a class="header" href="#io-parallelism">IO parallelism</a></h3>
+<p>The processing unit and the memory are two independent units. Therefore, the processor is able to perform computations independently of the memory reads and writes. For instance, it can request some data from RAM as well as perform an addition between two numbers it has already loaded while waiting for the data to be received. This means we can potentially completely overlap computation times with memory movements. In our execution model, steps 1, 2, and 3 can all be executed in parallel.</p>
+<h3 id="single-instruction-multiple-data-simd"><a class="header" href="#single-instruction-multiple-data-simd">Single Instruction Multiple Data (<a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_data">SIMD</a>)</a></h3>
+<p>Most modern chips are capable of executing a single instruction on multiple elements at once. This can mean adding two vectors with one another in one cycle, reducing (ie. summing) a vector into a scalar, or even running a matrix dot product within specialized Arithmetic Logic Units (ALUs) in TPUs' and GPUs' tensor cores.</p>
+<ul>
+<li>Modern x86 chips feature AVX registers</li>
+<li>TPUs have MXUs for matrix dot products, VPUs for elementwise vectorized operations, and XLUs for reductions</li>
+<li>GPUs have tensor cores for matrix dot products</li>
+</ul>
+<p>Coming back to our execution model. Instead of executing one operation at a time on scalars, we instead perform as many operations as we can in parallel within a SIMD unit and also load more data at once since our registers are larger.</p>
+<h3 id="instruction-level-parallelism"><a class="header" href="#instruction-level-parallelism">Instruction Level Parallelism</a></h3>
+<p>As we have mentioned, modern chips possess multiple circuits that specialize in the handling of different data types and operations. For instance, TPUs have MXUs and VPUs. Some of these circuits can also be used independently. For instance, we could compute a dot product on the MXU, and apply a ReLU activation at the same time on the VPU (more specifically, perform a dot product, write the output to the VPU, do the next dot product at the same time as we apply ReLU on the VPU.)</p>
+<h3 id="multiple-threads-of-execution"><a class="header" href="#multiple-threads-of-execution">Multiple threads of execution</a></h3>
+<p>Finally, modern architectures usually feature multiple processing units that can execute operations independently of one another. This is the main differentiator of GPUs which possess thousands of cores that can all execute operations in parallel on different data addresses. This model comes with additional complexities such as the need to synchronize data across cores safely and efficiently.</p>
+<p>Coming back to the original model, we now execute the model multiple times in parallel.</p>
+<h2 id="comparison-of-on-chip-parallelism"><a class="header" href="#comparison-of-on-chip-parallelism">Comparison of On-Chip Parallelism</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Parallelism Type</th><th style="text-align: left">Core Concept</th><th style="text-align: left">⚙️ Hardware Example</th><th style="text-align: left">💻 Software Abstraction</th><th style="text-align: left">👤 Who Implements This?</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>IO parallelism</strong></td><td style="text-align: left">Hiding memory latency by performing computation while waiting for data to be fetched.</td><td style="text-align: left">GPU warp schedulers swapping threads stalled on memory reads; hardware prefetchers.</td><td style="text-align: left">Optimized kernels (e.g., in cuDNN, XLA).</td><td style="text-align: left"><strong>Chip Hardware</strong> (schedulers) &amp; <strong>Compiler</strong> (instruction scheduling).</td></tr>
+<tr><td style="text-align: left"><strong>SIMD</strong> <br/> (Single Instruction, Multiple Data)</td><td style="text-align: left">One instruction operating on many data elements (a vector) at once.</td><td style="text-align: left">GPU Tensor Cores (for matrices), TPU MXUs, CPU AVX registers.</td><td style="text-align: left">Vectorized code (e.g., <code>a + b</code> on tensors), <code>torch.matmul</code>.</td><td style="text-align: left"><strong>Compiler / Library</strong> (e.g., cuDNN, XLA). The programmer <em>enables</em> this by using high-level vector/matrix ops.</td></tr>
+<tr><td style="text-align: left"><strong>Instruction-Level Parallelism</strong> <br/> (Using Multiple ALUs)</td><td style="text-align: left">Using different, specialized execution units (ALUs) within a core at the same time.</td><td style="text-align: left">A TPU pipelining work from its MXU (matrix) to its VPU (vector).</td><td style="text-align: left"><strong>Kernel Fusion</strong> (e.g., <code>matmul + relu</code> in one operation).</td><td style="text-align: left"><strong>Compiler</strong> (e.g., <code>jax.jit</code>, XLA). The chip hardware makes it possible.</td></tr>
+<tr><td style="text-align: left"><strong>Multithreading / Multicore</strong> <br/> (MIMD / SIMT)</td><td style="text-align: left">Multiple processing units (cores) executing instructions independently.</td><td style="text-align: left">Multi-core CPU (MIMD), thousands of CUDA Cores on a GPU (SIMT).</td><td style="text-align: left"><strong>Data Parallelism</strong> (splitting a batch over cores) or Model Parallelism.</td><td style="text-align: left"><strong>Programmer &amp; Library</strong> (e.g., CUDA, which manages threads for kernels).</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="estimating-performance"><a class="header" href="#estimating-performance">Estimating Performance</a></h1>
+<p>Probably the most common and important interview question.</p>
+<p>We want to answer the following question: &quot;Given my code and my chip, what is the fastest theoretical time this function should take?&quot;</p>
+<p>We can simply model it, by assuming we can overlap all the components involved in the operation (Memory, Tensor Cores, etc), the theoretical fastest time is going to be the time of the slowest component.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="how-to-estimate-our-performance"><a class="header" href="#how-to-estimate-our-performance">How to Estimate our Performance?</a></h1>
+<p>We need to figure out which part of the chip will be taking the largest amount of time.</p>
+<p>Therefore, we need:</p>
+<ol>
+<li>How much time will it take the ALUs to execute all computations?</li>
+<li>How long will we spend loading the data from the main memory to the ALUs?</li>
+<li>What is the maximum of these two values?</li>
+</ol>
+<p>Let's start with 1. Typically, we will estimate a simple dot product. The flops of a dot product are computed as such:</p>
+<pre><code class="language-python">for an mk,kn-&gt;mn dot product
+
+flops = m * k * n * 2
+</code></pre>
+<p>Now we need to divide the number of flops by the theoretical limit of the machine to get the peak theoretical compute performance.</p>
+<pre><code class="language-python">compute_seconds = flops / flops_per_second(chip)
+</code></pre>
+<p>Now, let's compute the time it will take to load the memory onto the ALUs and to write the output back.</p>
+<pre><code class="language-python">let's call the left hand side &quot;lhs&quot; and the right hand side &quot;rhs&quot;.
+
+total_memory_bytes = (m * k * bytes_per_element_lhs) + (k * n * bytes_per_element_rhs) + (m * n * bytes_out)
+</code></pre>
+<p>The time it should take to load the memory will be</p>
+<pre><code class="language-python">memory_time_seconds = total_memory_bytes / memory_bandwidth_seconds(chip) 
+</code></pre>
+<p>Our theoretical run time will be:</p>
+<pre><code class="language-python">max(compute_seconds, memory_time_seconds)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="practical-example"><a class="header" href="#practical-example">Practical Example</a></h1>
+<p>Let's estimate the run time of a dense MLP subblock of a transformer on an A100 Nvidia GPU.</p>
+<p>The specs for the GPU are as followed:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Specification</th><th style="text-align: left">A100 40GB PCIe</th></tr></thead><tbody>
+<tr><td style="text-align: left">FP32</td><td style="text-align: left">19.5 TFLOPS</td></tr>
+<tr><td style="text-align: left">BFLOAT16 Tensor Core</td><td style="text-align: left">312 TFLOPS</td></tr>
+<tr><td style="text-align: left">GPU Memory Bandwidth</td><td style="text-align: left">1,555 GB/s</td></tr>
+</tbody></table>
+</div>
+<pre><code class="language-python">@torch.compile
+def mlp(x, w1, w2, wlinear):
+  x1 = x @ w1
+  x1 = torch.nn.ReLU()(x1)
+  x2 = x @ w2
+  x = x1 * x2
+  out = x @ wlinear
+  return out
+</code></pre>
+<p>Let's say that our d_model is 4096 and our hidden dimension is 8192. Let's start with a batch size of 32.</p>
+<ol>
+<li><strong>Tensore Core</strong> We have 2 dot products <code>bd,df-&gt;bf</code> and one <code>bf,fd-&gt;bd</code>, <code>flops = 32 * 4096 * 8192 * 2</code> each. We calculate the matmul time against the 312 TFLOPS BF16 Tensor Core spec, as these are specialized for matrix operations.</li>
+</ol>
+<pre><code class="language-python">tc_time_secs = flops * 3 / tensor_core_flops_per_sec 
+tc_time_secs = 32 * 4096 * 8192 * 2 * 3 / (312 * 1e12)
+tc_time_secs = 0.00002065
+</code></pre>
+<ol start="2">
+<li><strong>CUDA Cores</strong> We have the ReLU and the elementwise multiplication <code>x1 * x2</code> bot of these operations take <code>b * f</code> flops. We calculate the ReLU and element-wise ops against the 19.5 TFLOPS FP32 CUDA Core spec, as Tensor Cores cannot run these.</li>
+</ol>
+<pre><code class="language-python">cuda_time_secs = 32 * 8192 * 2 / (19.5 * 1e12)
+cuda_time_secs = 2.69e-8
+</code></pre>
+<ol start="3">
+<li><strong>Memory load times</strong> We have to load <code>x</code>, <code>w1</code>, <code>w2</code>, and <code>wlinear</code>. We have to write the output. We assume we do not have to write and read the intermediate activations... This is a key benefit of using <code>torch.compile</code>, which performs kernel fusion. It merges the <code>matmul</code>, <code>ReLU</code>, and <code>element-wise multiply</code> operations into a single kernel, so the intermediate results (like <code>x1</code> and <code>x2</code>) never have to be written to or read from the main (HBM) memory.</li>
+</ol>
+<pre><code class="language-python">bf16_bitsize = 2
+
+x_size = 32 * 4096 * bf16_bitsize
+out_size = x_size
+w_size = 4096 * 8192 * bf16_bitsize
+total_size = x_size + 3 * w_size + out_size
+
+memory_time_secs = total_size / (1.555 * 1e12)
+memory_time_secs = 0.000129
+</code></pre>
+<ol start="4">
+<li><strong>Estimation</strong></li>
+</ol>
+<pre><code class="language-python">estimation = max(tc_time_secs, cuda_time_secs, memory_time_secs)
+estimation = 0.000129
+</code></pre>
+<p>Our estimation is ~129µs. Let's run it into colab on an A100.</p>
+<pre><code class="language-python">mlp(x, w_gating_1, w_gating_2, w_linear)
+%timeit mlp(x, w_gating_1, w_gating_2, w_linear)
+</code></pre>
+<pre><code>191 µs ± 8.17 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+</code></pre>
+<p>The actual runtime is 48% slower than our estimate, which is expected because of inefficiencies like kernel launch overheads, synchronization, and any small gaps between the fused operations.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="roofline-model"><a class="header" href="#roofline-model">Roofline Model</a></h1>
+<p>The roofline model measures the peak throughput of the chip.</p>
+<h2 id="the-core-concept-arithmetic-intensity"><a class="header" href="#the-core-concept-arithmetic-intensity">The Core Concept: Arithmetic Intensity</a></h2>
+<p><strong>Arithmetic Intensity (AI):</strong> is a characteristic of your algorithm. It's the ratio of compute to memory access.</p>
+<pre><code class="language-python">AI = flops / data_moved
+</code></pre>
+<p>The achievable performance will be expressed as</p>
+<pre><code class="language-python">perf = min(peak_flops, peak_bandwidth * AI)
+</code></pre>
+<p><img src="estimation/./roofline.png" alt="img" /></p>
+<h2 id="takeaway"><a class="header" href="#takeaway">Takeaway</a></h2>
+<p>The key takeaway is that as long as we are memory bound, increasing the arithmetic intensity will yield significant throughput improvements. When we are compute bound, increasing the arithmetic intensity, will commensurably increase the latency, resulting in no throughput gains. Therefore, we always want to be compute bound for throughput, but any point on the &quot;flat part&quot; of the roofline will be as efficient as any other.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="interview-questions"><a class="header" href="#interview-questions">Interview Questions</a></h1>
+<h2 id="does-my-runtime-make-sense"><a class="header" href="#does-my-runtime-make-sense">Does my runtime make sense?</a></h2>
+<p>You will be shown some code. You will be asked whether the runtime of the code makes sense given the performance characteristics of a chip. Compute the expected runtime and compare it to the measured runtime.</p>
+<p>If the observed runtime is an order of magnitude slower than expected, look for inefficiencies.</p>
+<ul>
+<li>Are the kernels compiled and fused?</li>
+<li>Is the data properly allocated on the GPU or is it copied to and from the CPU?</li>
+<li>Are we using some non vectorized operations that are not being properly fused?</li>
+<li>Are we materializing some intermediate computations that don't have to be?</li>
+</ul>
+<p>If the observed runtime is close expected, you will have to propose ideas to make the runtime faster.</p>
+<ul>
+<li>If we are memory bound, we should try lowering the memory loads by downcasting from <code>fp32</code> to <code>bf16</code>, or from <code>bf16</code> to <code>i8/i4</code> through quantization.</li>
+<li>If we are compute-bound, we have successfully saturated the chip's compute units and achieved peak throughput. At this point, you can't get more throughput. The conversation now shifts to latency. To lower latency, you must reduce the total work, which means either:
+<ul>
+<li>Reducing the batch size, which will trade some of our hard-won throughput for lower latency.</li>
+<li>Reducing the FLOPS of the model itself through techniques like pruning or distillation.</li>
+</ul>
+</li>
+</ul>
+<h2 id="performance-modelling"><a class="header" href="#performance-modelling">Performance Modelling</a></h2>
+<p>You will be shown a model's architecture, and given a chip's specification.</p>
+<ol>
+<li>You will be asked to model the runtime of the model given different batch sizes.
+<ul>
+<li>Compute the expected runtime as we've seen before.</li>
+</ul>
+</li>
+<li>You will have to compute the amount of memory required for each batch size.</li>
+<li>You will be tasked with finding the optimum batch size to maximize throughput.
+<ul>
+<li>According to the roofline model, this corresponds to the smallest batch size that makes the operation compute-bound. This is the &quot;knee&quot; or &quot;ridge point&quot; of the roofline. Any batch size larger than this will only increase latency without any corresponding gain in throughput, as you're already at <code>Peak_FLOPS</code>.</li>
+<li>Find which batch size is compute bound by simply figuring out which batch size has a higher compute time than memory time.</li>
+<li>The optimum batch size should not use more memory than available on the chip.</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
