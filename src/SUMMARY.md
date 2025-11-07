@@ -8,3 +8,7 @@
   - [Roofline Model](./estimation/roofline.md)
   - [Interview Questions](./estimation/questions.md)
 - [Distributed Computations](./distributed/distributed.md)
+  - [All Gather](./distributed/all_gather.md)
+  - [All Reduce](./distributed/all_reduce.md)
+  - [All To All](./distributed/all_to_all.md)
+  - [Data Parallelism](./distributed/data.md)
