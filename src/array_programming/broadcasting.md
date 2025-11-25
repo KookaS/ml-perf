@@ -1,6 +1,15 @@
 # Broadcasting
 
-We said in the [previous chapter](./operators.md) that arrays must have the same shape to apply element wise operators. This is not exactly true. If one of the axes is exactly `1`, this axis will be replicated along the corresponding axis on the other array. The replication is only logical and does not actually materialize into a larger allocation. Note that a 1-sized axis is completely free in memory.
+We said in the [previous chapter](./operators.md) that arrays must have the same shape to apply element wise operators. This is not exactly true.
+
+1. If one of the axes is exactly `1`, this axis will be replicated along the corresponding axis on the other array.
+    - This means that we can add `[4, 2] + [1, 2]`
+2. If one array has less dimension than the other, `NumPy` will read both shapes right to left as long as the dimensions match, or if one of them is 1. Then it will virtually add `1` sized dimension to the smaller array.
+    - This means that we can add `[32, 64, 64] + [64, 64]`
+    - We can add any scalar to any array
+    - We cannot implicitly add `[4, 2] + [4,]`, we need to first add a dimension ourselves `[4, 2] + [4,][:, None]`
+
+The replication is only logical and does not actually materialize into a larger allocation. Note that a 1-sized axis is completely free in memory.
 
 We can add new axes of size one by slicing the array with an extra `None` or `np.newaxis` at the required position. We can also simply call `arr.reshape(newshape)`.
 
@@ -37,7 +46,7 @@ Broadcasting is used in many cases to scale an array or to apply a bias on a who
 
 ## 1D Masking
 
-It is also widely used for masking. Let's look at a concrete example. We have a matrix with 1024 rows and 256 columns, we know that the 30 last rows are padding and contain garbage values. We want to find the sum of each rows along the column axis.
+It is also widely used for masking. Let's look at a concrete example. We have a matrix with 1024 rows and 256 columns, we know that the 30 last rows are padding and contain garbage values.
 
 `NumPy` comes with a very convenient function called `np.arange(size)` which creates an array of shape `(size,)` where each value is its index. We can use it to create a mask to keep the first first 994 elements by doing `np.arange(arr.shape[0]) < non_padded`.
 
@@ -60,7 +69,8 @@ mask = (np.arange(arr.shape[0]) < valid_rows)[:, None]
 # The mask is virtually replicated across all 256 columns
 masked_arr = arr * mask
 
-# Sum along rows
+# Sum down the rows (collapsing axis 0)
+# Result is (256,) containing the sum of valid elements for each column
 print(masked_arr.sum(axis=0).shape) # (256,)
 ```
 
