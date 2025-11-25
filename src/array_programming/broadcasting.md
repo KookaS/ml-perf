@@ -9,7 +9,7 @@ We said in the [previous chapter](./operators.md) that arrays must have the same
     - We can add any scalar to any array
     - We cannot implicitly add `[4, 2] + [4,]`, we need to first add a dimension ourselves `[4, 2] + [4,][:, None]`
 
-The replication is only logical and does not actually materialize into a larger allocation. Note that a 1-sized axis is completely free in memory.
+**Performance Note:** The replication is virtual. NumPy sets the stride to 0 for broadcasted dimensions, meaning the data is not physically copied. A broadcasted axis is "free" in terms of memory.
 
 We can add new axes of size one by slicing the array with an extra `None` or `np.newaxis` at the required position. We can also simply call `arr.reshape(newshape)`.
 
