@@ -44,18 +44,24 @@ It is also widely used for masking. Let's look at a concrete example. We have a 
 ```python
 import numpy as np
 
-# Random matrix of shape (1024, 256)
+# Matrix: (1024 rows, 256 cols)
 arr = np.random.normal(size=(1024, 256))
 
 padding = 30
-non_padded = arr.shape[0] - padding
-# Mask of shape (1024,)
-mask = np.arange(arr.shape[0]) < non_padded
+valid_rows = arr.shape[0] - padding
 
-# Broadcast and apply the mask
-masked_arr = arr * mask[:, None]
-# Reduce the first axis
-masked_arr.sum(axis=0)
+# Create a column vector mask: Shape (1024, 1)
+# 1. np.arange creates (1024,)
+# 2. Comparison creates boolean (1024,)
+# 3. Slicing [:, None] adds the axis -> (1024, 1)
+mask = (np.arange(arr.shape[0]) < valid_rows)[:, None]
+
+# Broadcast: (1024, 256) * (1024, 1)
+# The mask is virtually replicated across all 256 columns
+masked_arr = arr * mask
+
+# Sum along rows
+print(masked_arr.sum(axis=0).shape) # (256,)
 ```
 
 ## 2D Masking
@@ -65,22 +71,28 @@ It is also extremely common in LLMs to build a 2D mask for the attention mechani
 ```python
 import numpy as np
 
-batch_size = 32
-sequence_length = 256
-num_heads = 4
+seq_len = 4
+# Create indices [0, 1, 2, 3]
+indices = np.arange(seq_len)
 
-qk = np.random.normal(size=(batch_size, sequence_length, num_heads, sequence_length))
+# Logic: Is query position (i) >= key position (j)?
+# (4, 1) >= (1, 4) -> Broadcasts to (4, 4)
+is_causal = indices[:, None] >= indices[None, :]
 
-indices = np.arange(sequence_length)
+# Create the additive mask
+# 0.0 for valid, -inf for invalid (to be zeroed by softmax later)
+mask = np.where(is_causal, 0.0, -np.inf)
 
-# Index i >= Index j
-# Shape (sequence_length, sequence_length)
-mask_2d = indices[:, None] >= indices[None, :]
-# Replace the false indices with -infinity so they become 0 in the softmax
-mask_2d = np.where(mask_2d, 0.0, -np.inf)
-# Apply 2D mask against 4D array
-qk_masked = qk + mask_2d[None, :, None, :]
-# scores = softmax(qk_masked)
+print(mask)
+```
+
+*stdout*
+
+```python
+[[  0. -inf -inf -inf]
+ [  0.   0. -inf -inf]
+ [  0.   0.   0. -inf]
+ [  0.   0.   0.   0.]]
 ```
 
 ## Implementing a matrix multiplication with broadcasting
