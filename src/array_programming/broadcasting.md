@@ -7,24 +7,30 @@ We can add new axes of size one by slicing the array with an extra `None` or `np
 ```python
 import numpy as np
 
-# Shape (4, 2)
-# We want to add a bias vector of shape (2,) to every row
-data = np.ones((4, 2))
-bias = np.array([10, 20])
+# An array full of 1 of shape (4, 2)
+ones = np.ones((2, 4, 2))
+# Shape (2, 2)
+toadd = np.array([[0, 5], [10, 20]])
 
-# Broadcast bias to (1, 2) so it matches (4, 2)
-result = data + bias[None, :]
+# Reshape from (2, 2) to (2, 1, 2)
+toadd = toadd.reshape(2, 1, 2)
+# Alternatively, we could write toadd = toadd[:, None, :]
 
-print(f'{result=}')
+print(f'{ones + toadd=}')
 ```
 
 *stdout*
 
 ```python
-esult=array([[11., 21.],
-       [11., 21.],
-       [11., 21.],
-       [11., 21.]])
+ones + toadd=array([[[ 1.,  6.],
+        [ 1.,  6.],
+        [ 1.,  6.],
+        [ 1.,  6.]],
+
+       [[11., 21.],
+        [11., 21.],
+        [11., 21.],
+        [11., 21.]]])
 ```
 
 Broadcasting is used in many cases to scale an array or to apply a bias on a whole axis.
