@@ -5,7 +5,7 @@ At a high level, an array is an abstract representation of an n-dimensional arra
 1. **The Data Pointer:** The memory address where the data begins.
 2. **The Dtype:** The type of every element (e.g., int32, float16). This tells the CPU how many bytes to read per element.
 3. **The Shape:** The logical dimensions of the array.
-4. **The Stride:** An extra piece of information that specifies how the number of bytes to step in each dimension to reach the next element. This decouples the data layout from the logical shape, allowing for zero-copy operations like transposing.
+4. **The Stride:** An extra piece of information that specifies the number of bytes to step in each dimension to reach the next element. This decouples the data layout from the logical shape, allowing for zero-copy operations like transposing.
 
 ## The Physical Reality
 

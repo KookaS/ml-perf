@@ -3,6 +3,7 @@
 - [Introduction](./introduction.md)
 - [Array Programming Fundamentals](./array_programming/intro.md)
   - [What is an Array?](./array_programming/what_is_an_array.md)
+  - [Basic Operators](./array_programming/operators.md)
 - [On-Chip Parallelism](./on_chip_parallelism.md)
 - [Estimating Performance](./estimation/estimation.md)
   - [How to Compute It?](./estimation/compute.md)
