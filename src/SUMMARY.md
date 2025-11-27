@@ -7,6 +7,7 @@
   - [Broadcasting](./array_programming/broadcasting.md)
   - [Slicing](./array_programming/slicing.md)
   - [Indexing](./array_programming/indexing.md)
+  - [Reshaping And Transposing](./array_programming/reshape.md)
 - [On-Chip Parallelism](./on_chip_parallelism.md)
 - [Estimating Performance](./estimation/estimation.md)
   - [How to Compute It?](./estimation/compute.md)
