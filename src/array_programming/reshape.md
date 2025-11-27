@@ -74,7 +74,7 @@ Let's imagine an array of shape `(10, 32, 64)`.
 - As mentioned earlier, no data is actually moved, we just change the stride of the array.
 - There are many APIs for transposing.
   - Arrays with one or two dimensions can use `.transpose()` or `.T`.
-  - Any array can use `.transpose(*indices)` where indices maps the new axes to the old axes. For instance `(10, 32, 64).transpose(2, 0, 1)` becomes `(64, 10, 32)`.
+  - Any array can use `.transpose(*indices)` (equivalent to permute in `PyTorch`) where indices maps the new axes to the old axes. For instance `(10, 32, 64).transpose(2, 0, 1)` becomes `(64, 10, 32)`.
   - Any array can use `.swapaxes(axis1, axis2)` to swap the two axes provided.
 
 ```python
