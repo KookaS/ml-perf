@@ -4,6 +4,3 @@ language = "en"
 multilingual = false
 src = "src"
 title = "ML Performance"
-
-[output.html]
-google-analytics = "G-XTC0RF0JXF"
