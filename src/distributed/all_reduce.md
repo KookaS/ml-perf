@@ -4,6 +4,6 @@ An all reduce takes a sharded array, and it combines the elements of an axis usi
 
 For instance, a vector of length `256` whose single axis would be sharded over 4 devices:
 
-![img](allreduce.jpg)
+![img](./all_reduce.png)
 
 Each TPU initially holds 64 unique elements, after the all reduce, they all hold a vector which is replica of the sum of the vectors initially held by each chip.

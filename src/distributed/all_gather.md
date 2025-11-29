@@ -4,6 +4,6 @@ An all gather operation takes an array with an axis distributed over multiple ch
 
 For instance, a vector of length `256` whose single axis would be sharded over 4 devices:
 
-![img](ag.jpg)
+![img](ag.png)
 
 Each chip initially holds 64 different elements. After the all gather, they all have a replicated view of the same 256 elements.
