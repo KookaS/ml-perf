@@ -54,7 +54,7 @@ To implement our [initial unsharded model](./strategies.md#unsharded-example) wi
 Let's implement our 2 layers model with a `ReLU` activation, we shard the `Model` dimension across `N` devices such that each device holds `Model/N`:
 
 - **Correctness Note:** We do not need to `Reduce-Scatter` the activations gradients, just the weights gradients.
-- **Performance Note:** This implementation is "naive" because it waits for the backward pass to finish before syncing. Production systems (like PyTorch DDP) use **Gradient Bucketing:** they trigger the `reduce_scatter` for Layer `N` immediately while Layer `N-1` is still computing gradients, hiding the communication latency.
+- **Performance Note:** In a production system, we would overlap the `All-Gather` from layer `N` with the computations from layer `N-1`. We would also overlap the `Reduce-Scatters` from layer `N-1` with the gradients computations from layer `N`.
 
 ```python
 class FSDP(ShardedEngine):
