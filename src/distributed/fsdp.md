@@ -14,6 +14,8 @@ The main mechanism behind FSDP is called **Gather-Compute-Discard**. Since param
 
 *Note: The communication is typically overlapped with computation to hide latency.*
 
+![image](./fsdp.png)
+
 ## The three stages
 
 Sharding more tensors means increasing the amount of [All-Gathered](./all_gather.md) data. Ideally we would shard as little as possible. Nonetheless, if only sharding the optimizer's state is not enough, we need to shard the gradients as well, or even the model parameters.
