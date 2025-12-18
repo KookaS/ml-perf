@@ -32,4 +32,5 @@
   - [Quality Neutral](./optimizations/quality_neutral/quality_neutral.md)
     - [KV Caching](./optimizations/quality_neutral/kv_caching.md)
     - [Disaggregated Serving](./optimizations/quality_neutral/disagg.md)
+    - [Speculative Decoding](./optimizations/quality_neutral/speculative_decoding.md)
   - [Quality Detrimental](./optimizations/quality_detrimental/quality_detrimental.md)
