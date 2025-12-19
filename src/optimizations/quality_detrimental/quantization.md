@@ -16,7 +16,7 @@ Note that there are no mentions of `int4` in the table. This is because `int4` i
 
 Simply rounding weights to the nearest integer would degrade performance too much because model weights can have very different magnitudes (e.g., outliers). To solve this, we introduce a new tensor called `scales`.
 
-The `scales` map the small integer range (e.g., `-127` to `127`) back to the original floating point range. A quantized dot product between activations \\(x\\() and quantized weights \\(W_{quantized}\\) with scales \\(S\\) looks like this: \\[(x\cdot W_{quantized}) \times S\\]
+The `scales` map the small integer range (e.g., `-127` to `127`) back to the original floating point range. A quantized dot product between activations \\(x\\) and quantized weights \\(W_{quantized}\\) with scales \\(S\\) looks like this: \\[(x\cdot W_{quantized}) \times S\\]
 
 We first apply the matrix multiplication between \\(x\\) and \\(W_{quantized}\\) using the smaller dtype (fast), then we scale up the result using an element-wise product with \\(S\\) in the original `dtype` but with a much smaller tensor.
 
