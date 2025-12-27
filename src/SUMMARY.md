@@ -11,6 +11,7 @@
   - [Einsums](./array_programming/einsums.md)
   - [Practice: Implementing An LLM's Forward Pass](./array_programming/practice_llm.md)
 - [ML Compilers](./ml_compilers/ml_compilers.md)
+  - [Jax vs PyTorch](./ml_compilers/jax_vs_torch.md)
 - [Backward Pass](./backward_pass.md)
 - [On-Chip Parallelism](./on_chip_parallelism.md)
 - [Estimating Performance](./estimation/estimation.md)

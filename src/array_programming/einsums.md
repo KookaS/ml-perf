@@ -36,8 +36,8 @@ In Deep Learning, we often write code that shouldn't care about the number of ba
 `einsum` supports `...` to represent "all other dimensions".
 
 ```python
-# Apply a linear layer (Weights: feat_in, feat_out) to a tensor
-# of ANY shape ending in 'feat_in'
+# Apply a linear layer (Weights: i, j) to a tensor
+# of ANY shape ending in 'i'
 # ...i, ij -> ...j
 output = np.einsum('...i,ij->...j', input_tensor, weights)
 ```
