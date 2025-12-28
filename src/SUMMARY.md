@@ -41,6 +41,6 @@
   - [Quality Detrimental](./optimizations/quality_detrimental/quality_detrimental.md)
     - [Quantization](./optimizations/quality_detrimental/quantization.md)
 - [Mixture of Experts (MoE)](./moe/moe.md)
-  - [Expert Sharding (TODO)](./moe/expert_sharding.md)
+  - [Expert Sharding](./moe/expert_sharding.md)
   - [Expert Imbalance (TODO)](./moe/imbalance.md)
 - [Credits](./credits.md)

@@ -43,6 +43,9 @@ class ShardedEngine(ABC):
     def receive(self, src_id: int) -> npt.ArrayLike:
         ...
 
+    def send_async(self, src: npt.ArrayLike, dst: npt.ArrayLike, target_device_id: int) -> Future:
+        ...
+
     # --- Collective Communication ---
     def all_gather(self, arr: npt.ArrayLike, axis: int = 0) -> npt.ArrayLike:
         """Concatenates arrays from all devices along the specified axis."""
