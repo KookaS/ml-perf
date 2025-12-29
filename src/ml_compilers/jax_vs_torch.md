@@ -53,7 +53,7 @@ def conditional(a, b):
         return a
     return jnp.exp(b)
 
-add(3, 4)
+conditional(3, 4)
 ```
 
 *stderr*
