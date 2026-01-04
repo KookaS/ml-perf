@@ -77,3 +77,13 @@ Pipelining is optimized for **throughput** (requests per second) at the cost of 
 | **Communication** | ✅ **Low** | We only send activations between devices at the boundaries (e.g., after layer 4). This is much cheaper than Tensor Parallelism. |
 | **Latency** | ❌ **High** | A single request must travel **sequentially** through all devices. Device 4 cannot start until Device 3 finishes. |
 | **Memory** | ✅ **Efficient** | Parameters are **split across devices**, allowing us to fit larger models. |
+
+## Playground
+
+Below is the implementation of Pipelining in PyTorch.
+
+<div id="thebe-activate"></div>
+
+```python
+{{#include ../../code/distributed/pp.py}}
+```
