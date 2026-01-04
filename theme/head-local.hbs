@@ -1,5 +1,3 @@
-{{!-- theme/head-local.hbs --}}
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XTC0RF0JXF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,12 +10,6 @@
 <script src="https://unpkg.com/thebe@latest/lib/index.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-
-    console.log("Thebe object:", window.thebe);
-    console.log("Available methods:", Object.keys(window.thebe || {}));
-
-    const cells = document.querySelectorAll("code.language-python");
-    console.log("Found cells:", cells.length, cells);
     
     // CHECK: Only run if the "activator" div exists on this page
     const activator = document.getElementById("thebe-activate");
