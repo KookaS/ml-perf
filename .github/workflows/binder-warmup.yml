@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Trigger Binder Build
         run: |
-          curl -L https://mybinder.org/build/gh/sakex/ml-perf/main
+          curl -L https://mybinder.org/build/gh/${{ github.repository }}/main
