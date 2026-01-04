@@ -1,0 +1,16 @@
+name: Warmup Binder
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "requirements.txt"
+
+jobs:
+  binder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Binder Build
+        run: |
+          curl -L https://mybinder.org/build/gh/${{ github.repository }}/main
