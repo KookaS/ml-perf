@@ -1,11 +1,11 @@
+SHELL := /bin/bash
+
 # Run this when you are writing locally
 serve:
-	cp theme/head-local.hbs theme/head.hbs
 	mdbook serve
 
-# Run this before you push to GitHub
+# Run this before you push to GitHub (head.hbs is already prod)
 build:
-	cp theme/head-prod.hbs theme/head.hbs
 	mdbook build
 
 # Shortcut to run the python server easily

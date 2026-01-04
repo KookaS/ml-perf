@@ -20,7 +20,7 @@ Then install the python dependencies and launch jupyter:
 make run jupyter
 ```
 
-Then build and serve the book:
+Then build and serve the book locally:
 ```bash
 make serve
 ```

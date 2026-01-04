@@ -17,29 +17,58 @@ document.addEventListener('DOMContentLoaded', () => {
         return; // Exit if this page doesn't need a playground
     }
 
-    // Extract owner/repo from GitHub Pages URL
-    // URL format: https://{owner}.github.io/{repo}/
-    const owner = window.location.hostname.split('.')[0];
-    const repo = window.location.pathname.split('/')[1];
-    const binderRepo = `${owner}/${repo}`;
+    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
     // CONFIG: Define your repo and settings
-    const thebeConfig = {
-        requestKernel: true,
-        binderOptions: {
-            repo: binderRepo,
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./"
-        },
-        selector: "code.language-python"
-    };
+    let thebeConfig;
+    
+    if (isLocal) {
+        thebeConfig = {
+            requestKernel: true,
+            binderOptions: {
+                repo: "n/a",
+                binderUrl: "n/a",
+            },
+            useBinder: false,
+            useJupyterLite: false,
+            codeMirrorConfig: {
+                theme: "abcdef",
+                mode: "python"
+            },
+            kernelOptions: {
+                name: "ml-perf",
+                serverSettings: {
+                    "baseUrl": "http://127.0.0.1:8888",
+                    "wsUrl": "ws://127.0.0.1:8888",
+                    "token": ""
+                }
+            },
+            selector: "code.language-python"
+        };
+    } else {
+        // Extract owner/repo from GitHub Pages URL
+        // URL format: https://{owner}.github.io/{repo}/
+        const owner = window.location.hostname.split('.')[0];
+        const repo = window.location.pathname.split('/')[1];
+        const binderRepo = `${owner}/${repo}`;
+
+        thebeConfig = {
+            requestKernel: true,
+            binderOptions: {
+                repo: binderRepo,
+                ref: "main",
+            },
+            codeMirrorConfig: {
+                theme: "abcdef",
+                mode: "python"
+            },
+            kernelOptions: {
+                name: "python3",
+                path: "./"
+            },
+            selector: "code.language-python"
+        };
+    }
 
     // UI: Create a sophisticated "Launch" button inside the activator div
     const btn = document.createElement("button");
