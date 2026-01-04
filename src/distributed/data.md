@@ -55,3 +55,13 @@ class DataParallel(SingleDevice):
             'layer_1/weights': synced_w1_grads
         }
 ```
+
+## Playground
+
+Below is the implementation of Data Parallelism in PyTorch.
+
+<div id="thebe-activate"></div>
+
+```python
+{{#include ../../code/distributed/dp.py}}
+```
