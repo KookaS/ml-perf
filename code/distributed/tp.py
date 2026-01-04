@@ -108,4 +108,4 @@ def worker_fn(rank, world_size):
 
 if __name__ == "__main__":
     WORLD_SIZE = 4
-    mp.spawn(worker_fn, args=(WORLD_SIZE,), nprocs=WORLD_SIZE, join=True)
+    mp.start_processes(worker_fn, args=(WORLD_SIZE,), nprocs=WORLD_SIZE, join=True, start_method="fork")
