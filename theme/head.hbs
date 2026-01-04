@@ -6,3 +6,60 @@
 
   gtag('config', 'G-XTC0RF0JXF');
 </script>
+
+<script src="https://unpkg.com/thebe@latest/lib/index.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // CHECK: Only run if the "activator" div exists on this page
+    const activator = document.getElementById("thebe-activate");
+    if (!activator) {
+        return; // Exit if this page doesn't need a playground
+    }
+
+    // CONFIG: Define your repo and settings
+    const thebeConfig = {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sakex/ml-perf",
+            ref: "main",
+            // Binder builds are cached based on requirements.txt
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./"
+        },
+        // Only target code blocks marked as 'python'
+        selector: "code.language-python"
+    };
+
+    // UI: Create a sophisticated "Launch" button inside the activator div
+    const btn = document.createElement("button");
+    btn.innerHTML = "▶️ Initialize JAX Playground";
+    btn.className = "playground-button"; // You can style this in CSS
+    btn.style = "padding: 10px 20px; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 20px;";
+    
+    btn.onclick = async () => {
+        btn.innerHTML = "⏳ Spinning up Server (may take 20s)...";
+        btn.disabled = true;
+        try {
+            await thebe.bootstrap(thebeConfig);
+            btn.innerHTML = "✅ Environment Ready";
+            btn.style.background = "#4CAF50";
+            
+            // Optional: Auto-run hidden setup cells immediately
+            // const cells = thebe.notebook.getCells();
+            // cells.forEach(c => { if(c.element.classList.contains('setup')) c.run(); });
+        } catch (err) {
+            btn.innerHTML = "❌ Error loading server";
+            console.error(err);
+        }
+    };
+
+    activator.appendChild(btn);
+});
+</script>

@@ -137,3 +137,13 @@ class TensorParallel(ShardedEngine):
         
         return {'layer_0/weights': w0_grad, 'layer_1/weights': w1_grad}
 ```
+
+## Playground
+
+Below is the implementation of Tensor Parallelism in PyTorch.
+
+<div id="thebe-activate"></div>
+
+```python
+{{#include ../../code/distributed/tp.py}}
+```
