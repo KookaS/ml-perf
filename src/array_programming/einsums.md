@@ -111,7 +111,7 @@ np.testing.assert_allclose(res_naive, res_einsum)
 
 ### Single reduced dimension
 
-Let's visualize `bwh,whd->db`. We are reducing `w` and `h`, and transposing the result to `d, b`.
+Let's visualize `bwh,whd->dbh`. We are reducing `w`, and transposing the result to `d, b, h`.
 
 ```python
 import numpy as np
