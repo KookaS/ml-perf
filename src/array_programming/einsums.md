@@ -231,8 +231,8 @@ res = np.einsum('i,i->', a, b)
 
 #### Inner Product
 
-The inner product is a fundamental operation that measures the "alignment" between two vectors. While the outer product creates a matrix from two vectors, the inner product collapses two vectors into a single scalar value.
-If done with two 1D vectors, the result is similar to a dot-product. If done with matrices, this would be called inner-product.
+The Inner ProductThe inner product measures the "alignment" between two vectors. While the outer product expands two vectors into a matrix, the inner product collapses them into a single scalar.
+When applied to matrices, "inner product" often refers to the pairwise dot products between the rows of the matrices. This results in a matrix where each entry `(i, j)` tells us how aligned the `i`-th row of the first matrix is with the `j`-th row of the second.
 
 ```python
 import numpy as np
