@@ -10,14 +10,14 @@ uv venv
 uv pip install -r requirements.txt jupyter ipykernel
 ```
 
-Then make sure the python scripts work:
+Then make sure the python scripts work (if present as a file):
 ```bash
-uv run python -m code.distributed.tp
+uv run python -m code.<script_path>
 ```
 
 Then launch jupyter:
 ```bash
-make run jupyter
+make jupyter
 ```
 
 Then serve the book:
