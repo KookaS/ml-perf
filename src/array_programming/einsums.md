@@ -168,7 +168,7 @@ print("Success")
 ```
 
 
-## Exercices
+## Exercises
 
 let's practice now some einsum functions!
 
