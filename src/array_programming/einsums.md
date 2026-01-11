@@ -35,7 +35,7 @@ In Deep Learning, we often write code that shouldn't care about the number of ba
 
 `einsum` supports `...` to represent "all other dimensions".
 
-```python
+```
 # Apply a linear layer (Weights: i, j) to a tensor
 # of ANY shape ending in 'i'
 # ...i, ij -> ...j
@@ -43,6 +43,8 @@ output = np.einsum('...i,ij->...j', input_tensor, weights)
 ```
 
 ## Code Examples
+
+<div id="thebe-activate"></div>
 
 ```python
 import numpy as np
@@ -60,7 +62,7 @@ print(f"{np.einsum('bwh,whd->bd', images, weights).shape=}")
 
 *stdout*
 
-```python
+```
 np.einsum('bwh,whd->bd', images, weights).shape=(10, 512)
 ```
 
@@ -68,7 +70,7 @@ This reduces both the `width` and the `height`. But we could also just reduce th
 
 *stdout*
 
-```python
+```
 np.einsum('bwh,whd->dbh', images, weights).shape=(512, 10, 64)
 ```
 
@@ -103,6 +105,7 @@ res_naive = (a @ b) @ c
 res_einsum = np.einsum('ij,jk,kl->il', a, b, c, optimize=True)
 
 np.testing.assert_allclose(res_naive, res_einsum)
+print("Success")
 ```
 
 ## Code Visualization
@@ -136,6 +139,7 @@ for b in range(batch):
 
 einsum_out = np.einsum('bwh,whd->dbh', images, weights)
 np.testing.assert_almost_equal(manual_out, einsum_out)
+print("Success")
 ```
 
 We loop over all our batch dimensions, we extract vectors of size `w` that we dot product and write at the correct (transposed) output dimension.
@@ -145,7 +149,7 @@ We loop over all our batch dimensions, we extract vectors of size `w` that we do
 The `bwh,whd->db` einsum is more interesting because it reduces both `w` and `h`. Concretely, the only difference with the above einsum is that we will revisit the same `d, b` output tile multiple times, so we need to reduce intermediate dot products into their corresponding output indices.
 
 ```python
-...
+import numpy as np
 
 manual_out = np.zeros((d_model, batch))
 
@@ -160,4 +164,129 @@ for b in range(batch):
 
 einsum_out = np.einsum('bwh,whd->db', images, weights)
 np.testing.assert_almost_equal(manual_out, einsum_out)
+print("Success")
 ```
+
+
+## Exercises
+
+let's practice now some einsum functions!
+
+#### Outer Product
+
+In the context of vectors, the outer product takes two vectors and produces a matrix.
+If you have a vector `a` of size `M` and a vector `b` of size `N`, the outer product results in an `M x N` grid.
+
+```python
+import numpy as np
+
+size = 10
+
+a = np.ones((size))
+b = np.ones((size))
+
+res = np.einsum('your_einsum', a, b) # <-- einsum here
+
+desired = np.outer(a, b)
+np.testing.assert_array_equal(res.shape, desired.shape)
+print("Success")
+```
+
+<details>
+    <summary>Solution</summary>
+
+```
+res = np.einsum('i,j->ij', a, b)
+```
+</details>
+
+#### Dot Product
+
+The dot product refers to the sum of products of corresponding components between two vectors.
+Algebraically, the dot product is a single number (a scalar) calculated by taking two vectors of the same length, multiplying their matching elements, and summing the results.
+
+```python
+import numpy as np
+
+size = 10
+
+a = np.ones((size))
+b = np.ones((size))
+
+res = np.einsum('your_einsum', a, b) # <-- einsum here
+
+desired = np.dot(a, b)
+np.testing.assert_array_equal(res.shape, desired.shape)
+print("Success")
+```
+
+<details>
+    <summary>Solution</summary>
+
+```
+res = np.einsum('i,i->', a, b)
+```
+</details>
+
+
+#### Inner Product
+
+The Inner ProductThe inner product measures the "alignment" between two vectors. While the outer product expands two vectors into a matrix, the inner product collapses them into a single scalar.
+When applied to matrices, "inner product" often refers to the pairwise dot products between the rows of the matrices. This results in a matrix where each entry `(i, j)` tells us how aligned the `i`-th row of the first matrix is with the `j`-th row of the second.
+
+```python
+import numpy as np
+
+size = 10
+
+a = np.ones((size, 2*size))
+b = np.ones((size, 2*size))
+
+res = np.einsum('your_einsum', a, b) # <-- einsum here
+
+desired = np.inner(a, b)
+np.testing.assert_array_equal(res.shape, desired.shape)
+print("Success")
+```
+
+<details>
+    <summary>Solution</summary>
+
+```
+res = np.einsum('ik,jk->ij', a, b)
+```
+</details>
+
+
+#### Multiple matrix multiplications
+
+Now let's put in practice everything we have seen.
+
+```python
+import numpy as np
+
+batch = 100
+dim_in = 10
+dim_hidden = 1000
+dim_out = 20
+
+x = np.ones((batch, dim_in))
+w_in = np.ones((dim_in, dim_hidden))
+w_out = np.ones((dim_hidden, dim_out))
+
+res = np.einsum('your_einsum', x, w_in, w_out) # <-- einsum here
+
+desired = x @ w_in @ w_out
+np.testing.assert_array_equal(res.shape, desired.shape)
+print("Success")
+```
+
+<details>
+    <summary>Solution</summary>
+
+Make sure you use the optimal way to multiply the matrices with `optimize=True`.
+
+```
+res = np.einsum('bi,ih,ho->bo', x, w_in, w_out, optimize=True)
+```
+</details>
