@@ -165,27 +165,26 @@ np.testing.assert_almost_equal(manual_out, einsum_out)
 
 ## Exercises
 
-let's practice now some einsum functions!
+Let's practice now some einsum functions!
 
 <div id="thebe-activate"></div>
 
 #### Outer Product
 
-In the context of vectors, the outer product takes two vectors and produces a matrix.
-If you have a vector `a` of size `M` and a vector `b` of size `N`, the outer product results in an `M x N` grid.
+The outer product takes two vectors and produces a matrix, by multiplying every element of the first vector by every element of the second vector.
 
 ```python
 import numpy as np
 
 size = 10
 
-a = np.ones((size))
-b = np.ones((size))
+a = np.ones(size)
+b = np.ones(size)
 
 res = np.einsum('your_einsum', a, b) # <-- einsum here
 
 desired = np.outer(a, b)
-np.testing.assert_array_equal(res.shape, desired.shape)
+np.testing.assert_array_equal(res, desired)
 print(f"{res.shape=}")
 ```
 
@@ -208,13 +207,13 @@ import numpy as np
 
 size = 10
 
-a = np.ones((size))
-b = np.ones((size))
+a = np.ones(size)
+b = np.ones(size)
 
 res = np.einsum('your_einsum', a, b) # <-- einsum here
 
 desired = np.dot(a, b)
-np.testing.assert_array_equal(res.shape, desired.shape)
+np.testing.assert_array_equal(res, desired)
 print(f"{res.shape=}")
 ```
 
@@ -243,7 +242,7 @@ b = np.ones((size, 2*size))
 res = np.einsum('your_einsum', a, b) # <-- einsum here
 
 desired = np.inner(a, b)
-np.testing.assert_array_equal(res.shape, desired.shape)
+np.testing.assert_array_equal(res, desired)
 print(f"{res.shape=}")
 ```
 
@@ -275,7 +274,7 @@ w_out = np.ones((dim_hidden, dim_out))
 res = np.einsum('your_einsum', x, w_in, w_out) # <-- einsum here
 
 desired = x @ w_in @ w_out
-np.testing.assert_array_equal(res.shape, desired.shape)
+np.testing.assert_array_equal(res, desired)
 print(f"{res.shape=}")
 ```
 
@@ -310,7 +309,7 @@ w = np.ones((dim_model, n_heads, head_dim))
 res = np.einsum('your_einsum', x, w) # <-- einsum here
 
 desired = (x[:, None, :, :] @ w.transpose(1, 0, 2)).transpose(0, 2, 1, 3)
-np.testing.assert_array_equal(res.shape, desired.shape)
+np.testing.assert_array_equal(res, desired)
 print(f"{res.shape=}")
 ```
 
